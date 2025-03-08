@@ -1,0 +1,20 @@
+const mineflayer = require('mineflayer');
+
+const bot = mineflayer.createBot({
+    host: 'Modrencity.aternos.me',  // استبدلها بعنوان سيرفر ماين كرافت
+    port: 35300,         // البورت الافتراضي
+    username: 'modren', // اسم البوت
+});
+
+// عندما يتم طرد البوت أو يفقد الاتصال، يعيد الاتصال تلقائيًا
+bot.on('end', () => {
+    console.log('Disconnected! Reconnecting...');
+    setTimeout(() => {
+        createBot();
+    }, 5000); // ينتظر 5 ثوانٍ قبل إعادة الاتصال
+});
+
+// عند نجاح الاتصال
+bot.on('login', () => {
+    console.log('Bot has joined the server!');
+});
